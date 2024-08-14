@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: changeset/create-table-budget.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/create-table-expense.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/change-date-time-to-datetime.yaml
+      relativeToChangelogFile: true

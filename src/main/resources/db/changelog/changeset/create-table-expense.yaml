@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Roman Makulin
+      changes:
+        - createTable:
+            tableName: expense
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: budget_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: expense
+            baseColumnNames: budget_id
+            referencedTableName: budget
+            referencedColumnNames: id
+            constraintName: fk_expense_budget
+            onDelete: CASCADE

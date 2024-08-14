@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Roman Makulin
+      changes:
+        - modifyDataType:
+            columnName: start_date
+            newDataType: datetime
+            tableName: budget
+        - modifyDataType:
+            columnName: end_date
+            newDataType: datetime
+            tableName: budget
