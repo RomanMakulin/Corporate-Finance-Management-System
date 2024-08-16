@@ -1,6 +1,6 @@
 package com.wayz.CFMS.models;
 
-import com.wayz.CFMS.models.subModels.Categories;
+import com.wayz.CFMS.models.subModels.BudgetCategories;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ public class Expense{
     private double amount;
 
     @Enumerated(EnumType.STRING)
-    private Categories category;
+    private BudgetCategories category;
 
     private String description;
 
@@ -55,11 +55,11 @@ public class Expense{
         this.amount = amount;
     }
 
-    public Categories getCategory() {
+    public BudgetCategories getCategory() {
         return category;
     }
 
-    public void setCategory(Categories category) {
+    public void setCategory(BudgetCategories category) {
         this.category = category;
     }
 

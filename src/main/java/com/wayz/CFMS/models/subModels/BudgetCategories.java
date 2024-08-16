@@ -1,6 +1,6 @@
 package com.wayz.CFMS.models.subModels;
 
-public enum Categories {
+public enum BudgetCategories {
     OPERATING_EXPENSES("Операционные расходы"),
     CAPITAL_EXPENDITURES("Капитальные расходы"),
     MARKETING_AND_ADVERTISING("Маркетинг и реклама"),
@@ -17,7 +17,7 @@ public enum Categories {
 
     private final String description;
 
-    Categories(String description) {
+    BudgetCategories(String description) {
         this.description = description;
     }
 

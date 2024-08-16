@@ -1,9 +1,8 @@
 package com.wayz.CFMS.models;
 
-import com.wayz.CFMS.models.subModels.Categories;
+import com.wayz.CFMS.models.subModels.BudgetCategories;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,7 +23,7 @@ public class Budget {
     private double amount;
 
     @Enumerated(EnumType.STRING)
-    private Categories category;
+    private BudgetCategories category;
 
     @Column(name = "start_date")
     private LocalDateTime startDate;
@@ -56,12 +55,12 @@ public class Budget {
         this.amount = amount;
     }
 
-    public Categories getCategory() {
+    public BudgetCategories getCategory() {
         return category;
     }
 
-    public void setCategory(Categories categories) {
-        this.category = categories;
+    public void setCategory(BudgetCategories budgetCategories) {
+        this.category = budgetCategories;
     }
 
     public LocalDateTime getStartDate() {
