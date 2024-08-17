@@ -8,3 +8,6 @@ databaseChangeLog:
   - include:
       file: changeset/change-date-time-to-datetime.yaml
       relativeToChangelogFile: true
+  - include:
+      file: changeset/create-table-reports-and-sub-tables.yaml
+      relativeToChangelogFile: true

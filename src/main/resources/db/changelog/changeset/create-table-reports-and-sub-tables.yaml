@@ -1,0 +1,142 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Roman Makulin
+      changes:
+        - createTable:
+            tableName: reports
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: date_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: report_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_summary
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_expense
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_variance
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 5
+      author: Roman Makulin
+      changes:
+        - createTable:
+            tableName: report_budget_summary
+            columns:
+              - column:
+                  name: report_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: budget_amount
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: report_id
+            baseTableName: report_budget_summary
+            constraintName: fk_report_budget_summary_report
+            referencedColumnNames: id
+            referencedTableName: reports
+
+  - changeSet:
+      id: 6
+      author: Roman Makulin
+      changes:
+        - createTable:
+            tableName: report_expense_summary
+            columns:
+              - column:
+                  name: report_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expense_amount
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: report_id
+            baseTableName: report_expense_summary
+            constraintName: fk_report_expense_summary_report
+            referencedColumnNames: id
+            referencedTableName: reports
+
+  - changeSet:
+      id: 7
+      author: Roman Makulin
+      changes:
+        - createTable:
+            tableName: report_variance_summary
+            columns:
+              - column:
+                  name: report_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: variance_amount
+                  type: decimal(19,2)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: report_id
+            baseTableName: report_variance_summary
+            constraintName: fk_report_variance_summary_report
+            referencedColumnNames: id
+            referencedTableName: reports
