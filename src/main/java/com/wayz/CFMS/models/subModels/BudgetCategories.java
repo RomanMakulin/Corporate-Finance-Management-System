@@ -1,5 +1,8 @@
 package com.wayz.CFMS.models.subModels;
 
+/**
+ * Категории бюджета
+ */
 public enum BudgetCategories {
     OPERATING_EXPENSES("Операционные расходы"),
     CAPITAL_EXPENDITURES("Капитальные расходы"),
@@ -15,6 +18,9 @@ public enum BudgetCategories {
     CUSTOMER_SERVICE("Обслуживание клиентов"),
     BUSINESS_DEVELOPMENT("Бизнес-развитие");
 
+    /**
+     * Описание категории
+     */
     private final String description;
 
     BudgetCategories(String description) {

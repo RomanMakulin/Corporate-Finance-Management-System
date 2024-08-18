@@ -12,21 +12,37 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "expense")
-public class Expense{
+public class Expense {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /**
+     * Дата расхода
+     */
     private LocalDateTime date;
 
+    /**
+     * Сумма расхода
+     */
     private double amount;
 
+    /**
+     * Категория текущего расхода.
+     * Категории используются как у бюджета для сравнения фактических трат с запланированными
+     */
     @Enumerated(EnumType.STRING)
     private BudgetCategories category;
 
+    /**
+     * Описание расхода
+     */
     private String description;
 
+    /**
+     * Бюджет, предназначенный для текущего расхода
+     */
     @OneToOne
     @JoinColumn(name = "budget_id", referencedColumnName = "id")
     private Budget budget;

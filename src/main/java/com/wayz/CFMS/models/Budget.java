@@ -18,16 +18,31 @@ public class Budget {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /**
+     * Наименование бюджета
+     */
     private String name;
 
+    /**
+     * Планируемая сумма бюджета
+     */
     private double amount;
 
+    /**
+     * Категория бюджета
+     */
     @Enumerated(EnumType.STRING)
     private BudgetCategories category;
 
+    /**
+     * Дата начала бюджета
+     */
     @Column(name = "start_date")
     private LocalDateTime startDate;
 
+    /**
+     * Дата окончания бюджета
+     */
     @Column(name = "end_date")
     private LocalDateTime endDate;
 

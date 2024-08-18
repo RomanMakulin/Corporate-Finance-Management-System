@@ -1,14 +1,20 @@
 package com.wayz.CFMS.models.subModels;
 
+/**
+ * Тип отчета
+ */
 public enum ReportType {
 
-    DAILY("Daily"),
-    WEEKLY("Weekly"),
-    MONTHLY("Monthly"),
-    QUARTERLY("Quarterly"),
-    ANNUAL("Annual"),
-    CUSTOM("Custom");
+    DAILY("Дневной"),
+    WEEKLY("Недельный"),
+    MONTHLY("Месячный"),
+    QUARTERLY("Квартальный"),
+    ANNUAL("Годовой"),
+    CUSTOM("Другое");
 
+    /**
+     * Описание расхода
+     */
     private final String description;
 
 

@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Финансовый Отчет
+ */
 @Entity
 @Table(name = "reports")
 public class Report {
@@ -17,58 +20,80 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /**
+     * Дата и время формирования отчета.
+     */
     @Column(name = "date_time")
-    // Дата и время формирования отчета.
     private LocalDateTime reportDateTime;
 
+    /**
+     * Тип отчета (например, "Monthly", "Quarterly", "Annual", "Custom").
+     */
     @Column(name = "report_type")
     @Enumerated(EnumType.STRING)
-    // Тип отчета (например, "Monthly", "Quarterly", "Annual", "Custom").
     private ReportType reportType;
 
+    /**
+     * Дата начала отчетного периода.
+     */
     @Column(name = "start_date")
-    // Дата начала отчетного периода.
     private LocalDateTime startDate;
 
+    /**
+     * Дата окончания отчетного периода.
+     */
     @Column(name = "end_date")
-    // Дата окончания отчетного периода.
     private LocalDateTime endDate;
 
+    /**
+     * Сводка по бюджету — сумма, запланированная для каждой категории бюджета в отчетный период
+     */
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "report_budget_summary", joinColumns = @JoinColumn(name = "report_id"))
     @MapKeyColumn(name = "category")
     @Column(name = "budget_amount")
-    // Сводка по бюджету — сумма, запланированная для каждой категории бюджета в отчетный период
     private Map<BudgetCategories, Double> budgetSummary;
 
+    /**
+     * Сводка по фактическим расходам — сумма расходов по каждой категории в отчетный период.
+     */
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "report_expense_summary", joinColumns = @JoinColumn(name = "report_id"))
     @MapKeyColumn(name = "category")
     @Column(name = "expense_amount")
-    // Сводка по фактическим расходам — сумма расходов по каждой категории в отчетный период.
     private Map<BudgetCategories, Double> expenseSummary;
 
+    /**
+     * Разница между запланированным бюджетом и фактическими расходами по каждой категории.
+     */
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "report_variance_summary", joinColumns = @JoinColumn(name = "report_id"))
     @MapKeyColumn(name = "category")
     @Column(name = "variance_amount")
-    // Разница между запланированным бюджетом и фактическими расходами по каждой категории.
     private Map<BudgetCategories, Double> varianceSummary;
 
+    /**
+     * Общая сумма бюджета на отчетный период.
+     */
     @Column(name = "total_summary")
-    // Общая сумма бюджета на отчетный период.
     private double totalSummary;
 
+    /**
+     * Общая сумма фактических расходов на отчетный период.
+     */
     @Column(name = "total_expense")
-    // Общая сумма фактических расходов на отчетный период.
     private double totalExpense;
 
+    /**
+     * Общее отклонение — разница между общим бюджетом и общими расходами.
+     */
     @Column(name = "total_variance")
-    // Общее отклонение — разница между общим бюджетом и общими расходами.
     private double totalVariance;
 
+    /**
+     * Автор отчета
+     */
     @Column(name = "created_by")
-    // Автор отчета
     private String createdBy;
 
     public Report() {
