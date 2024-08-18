@@ -1,0 +1,52 @@
+package com.wayz.CFMS.services.user;
+
+import com.wayz.CFMS.models.User;
+
+import java.util.UUID;
+
+/**
+ * Интерфейс получения информации о пользователях
+ */
+public interface UserInfoService {
+
+    /**
+     * Получение пользователя по уникальному идентификатору
+     *
+     * @param id уникальный идентификатор пользователя
+     * @return объект пользователя
+     */
+    User getUserById(UUID id);
+
+    /**
+     * Получение пользователя по логину
+     *
+     * @param login логин
+     * @return объект пользователя
+     */
+    User getUserByLogin(String login);
+
+    /**
+     * Получение пользователя по почтовому адресу пользователя
+     *
+     * @param email почта пользователя
+     * @return объект пользователя
+     */
+    User getUserByEmail(String email);
+
+    /**
+     * Проверить существует ли пользователь в системе по логину и почте
+     *
+     * @param email почта
+     * @param login логин
+     * @return логическое значение да или нет
+     */
+    boolean existsUserByEmailAndLogin(String email, String login);
+
+    /**
+     * Проверить существует ли пользователь в системе по уникальному идентификатору пользователя
+     *
+     * @param id уникальный идентификатор
+     * @return логическое значение да или нет
+     */
+    boolean existsUserById(UUID id);
+}

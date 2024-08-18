@@ -1,0 +1,49 @@
+package com.wayz.CFMS.services.user.impl;
+
+import com.wayz.CFMS.models.User;
+import com.wayz.CFMS.repositories.UserRepository;
+import com.wayz.CFMS.services.user.UserInfoService;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+/**
+ * Сервис получения информации о пользователе
+ */
+@Service
+public class UserInfoServiceImpl implements UserInfoService {
+
+    private final UserRepository userRepository;
+
+    public UserInfoServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public User getUserById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Ошибка получения пользователя по ID"));
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        return userRepository.getUsersByLogin(login)
+                .orElseThrow(() -> new IllegalArgumentException("Ошибка получения пользователя по login"));
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.getUsersByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Ошибка получения пользователя по email"));
+    }
+
+    @Override
+    public boolean existsUserByEmailAndLogin(String email, String login) {
+        return userRepository.existsUserByEmailAndLogin(email, login);
+    }
+
+    @Override
+    public boolean existsUserById(UUID id) {
+        return userRepository.existsById(id);
+    }
+}
