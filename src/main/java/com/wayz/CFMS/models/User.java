@@ -96,7 +96,12 @@ public class User {
      * @param email        почта из запроса
      * @param birthdayDate дата рождения из запроса
      */
-    public User(String login, String password, String firstName, String lastName, String email, LocalDateTime birthdayDate) {
+    public User(String login,
+                String password,
+                String firstName,
+                String lastName,
+                String email,
+                LocalDateTime birthdayDate) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
