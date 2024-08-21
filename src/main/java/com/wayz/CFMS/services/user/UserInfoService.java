@@ -49,4 +49,27 @@ public interface UserInfoService {
      * @return логическое значение да или нет
      */
     boolean existsUserById(UUID id);
+
+    /**
+     * Проверить последний вход в систему конкретного пользователя
+     *
+     * @param login логин пользователя
+     * @return ответ строчкой с датой и временем
+     */
+    String checkLastUserLoginDate(String login);
+
+    /**
+     * Проверить последнее обновление пользователя (дата)
+     *
+     * @param login логин пользователя
+     * @return ответ строчкой с датой и временем
+     */
+    String checkLastUserUpdateDate(String login);
+
+    /**
+     * Проверить дату регистрации пользователя
+     * @param login логин пользователя
+     * @return ответ строчкой с датой и временем
+     */
+    String getUserRegistrationDate(String login);
 }

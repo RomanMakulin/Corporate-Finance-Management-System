@@ -46,4 +46,22 @@ public class UserInfoServiceImpl implements UserInfoService {
     public boolean existsUserById(UUID id) {
         return userRepository.existsById(id);
     }
+
+    @Override
+    public String checkLastUserLoginDate(String login) {
+        User user = getUserByLogin(login);
+        return user.getFirstName() + " " + user.getLastName() + " последний раз был онлайн: " + user.getLastLoginDate();
+    }
+
+    @Override
+    public String checkLastUserUpdateDate(String login) {
+        User user = getUserByLogin(login);
+        return user.getFirstName() + " " + user.getLastName() + " последний раз был обновлен: " + user.getUpdatedDate();
+    }
+
+    @Override
+    public String getUserRegistrationDate(String login) {
+        User user = getUserByLogin(login);
+        return user.getFirstName() + " " + user.getLastName() + " был зарегистрирован в системе: " + user.getRegistrationDate();
+    }
 }
