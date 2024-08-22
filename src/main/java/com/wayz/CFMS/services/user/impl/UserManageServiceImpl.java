@@ -5,6 +5,7 @@ import com.wayz.CFMS.models.User;
 import com.wayz.CFMS.models.subModels.UserActivityStatus;
 import com.wayz.CFMS.services.user.UserInfoService;
 import com.wayz.CFMS.services.user.UserManageService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /**
  * Реализация интерфейса UserManageService для управления пользователями и их данными
  */
+@Service
 public class UserManageServiceImpl implements UserManageService {
 
     private final UserInfoService userInfoService;

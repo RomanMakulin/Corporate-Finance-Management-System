@@ -1,7 +1,8 @@
-package com.wayz.CFMS.services.user;
+package com.wayz.CFMS.services.user.auth;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
+import org.springframework.http.ResponseEntity;
 
 /**
  * Интерфейс управления авторизацией и регистрацией пользователя в системе
@@ -23,7 +24,7 @@ public interface UserAuthService {
      * @param password пароль пользователя
      * @return объект авторизованного пользователя
      */
-    User loginUserInSystem(String login, String password);
+    ResponseEntity<String> loginUserInSystem(String login, String password);
 
     /**
      * Выход пользователя из системы

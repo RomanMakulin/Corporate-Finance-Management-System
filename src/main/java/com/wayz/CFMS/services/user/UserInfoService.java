@@ -40,7 +40,23 @@ public interface UserInfoService {
      * @param login логин
      * @return логическое значение да или нет
      */
-    boolean existsUserByEmailAndLogin(String email, String login);
+    boolean existsUserByEmailOrLogin(String email, String login);
+
+    /**
+     * Существует ли пользователь в системе с такой почтой
+     *
+     * @param email почта пользователя
+     * @return логическое да или нет
+     */
+    boolean existsUserByEmail(String email);
+
+    /**
+     * Существует ли пользователь в системе с таким логином
+     *
+     * @param login логин пользователя
+     * @return логическое да или нет
+     */
+    boolean existsUserByLogin(String login);
 
     /**
      * Проверить существует ли пользователь в системе по уникальному идентификатору пользователя

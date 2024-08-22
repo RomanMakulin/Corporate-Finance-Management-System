@@ -3,6 +3,8 @@ package com.wayz.CFMS.services.user.impl;
 import com.wayz.CFMS.models.User;
 import com.wayz.CFMS.repositories.UserRepository;
 import com.wayz.CFMS.services.user.UserInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -38,8 +40,18 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public boolean existsUserByEmailAndLogin(String email, String login) {
-        return userRepository.existsUserByEmailAndLogin(email, login);
+    public boolean existsUserByEmail(String email) {
+        return userRepository.existsUserByEmail(email);
+    }
+
+    @Override
+    public boolean existsUserByLogin(String login) {
+        return userRepository.existsUserByLogin(login);
+    }
+
+    @Override
+    public boolean existsUserByEmailOrLogin(String email, String login) {
+        return userRepository.existsUserByEmailOrLogin(email, login);
     }
 
     @Override

@@ -18,9 +18,37 @@ public interface UserRepository extends JpaRepository<User, UUID> {
      * @param login логин
      * @return логическое выражение true/false
      */
-    boolean existsUserByEmailAndLogin(String email, String login);
+    boolean existsUserByEmailOrLogin(String email, String login);
 
+    /**
+     * Получить пользователя по логину
+     *
+     * @param login логин
+     * @return объект с пользователем, либо null
+     */
     Optional<User> getUsersByLogin(String login);
 
+    /**
+     * Получить пользователя по email
+     *
+     * @param email логин
+     * @return объект с пользователем, либо null
+     */
     Optional<User> getUsersByEmail(String email);
+
+    /**
+     * Существует ли пользователь в системе с такой почтой
+     *
+     * @param email почта пользователя
+     * @return логическое да или нет
+     */
+    boolean existsUserByEmail(String email);
+
+    /**
+     * Существует ли пользователь с таким логином
+     *
+     * @param login логин пользователя
+     * @return логическое да или нет
+     */
+    boolean existsUserByLogin(String login);
 }
