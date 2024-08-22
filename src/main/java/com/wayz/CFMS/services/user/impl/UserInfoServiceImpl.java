@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 /**
- * Сервис получения информации о пользователе
+ * Сервис получения информации о пользователе и прямое взаимодействие с базой данных
  */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -63,5 +63,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     public String getUserRegistrationDate(String login) {
         User user = getUserByLogin(login);
         return user.getFirstName() + " " + user.getLastName() + " был зарегистрирован в системе: " + user.getRegistrationDate();
+    }
+
+    @Override
+    public void saveUserInDataBase(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUserFromDataBase(User user) {
+        userRepository.delete(user);
     }
 }
