@@ -8,6 +8,7 @@ import com.wayz.CFMS.services.user.auth.LoginUserService;
 import com.wayz.CFMS.services.user.auth.PasswordGenerator;
 import com.wayz.CFMS.services.user.auth.RegistrationService;
 import com.wayz.CFMS.services.user.auth.UserAuthService;
+import com.wayz.CFMS.services.user.mail.MailService;
 import com.wayz.CFMS.services.user.security.CustomUserDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -58,13 +59,16 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
      */
     private final PasswordGenerator passwordGenerator;
 
+    private final MailService mailService;
+
 
     public UserAuthServiceImpl(@Lazy UserInfoService userInfoService,
                                @Lazy UserManageService userManageService,
                                RegistrationService registrationService,
                                LoginUserService loginUserService,
                                PasswordEncoder passwordEncoder,
-                               PasswordGenerator passwordGenerator) {
+                               PasswordGenerator passwordGenerator,
+                               MailService mailService) {
 
         this.userInfoService = userInfoService;
         this.registrationService = registrationService;
@@ -72,6 +76,7 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
         this.passwordEncoder = passwordEncoder;
         this.userManageService = userManageService;
         this.passwordGenerator = passwordGenerator;
+        this.mailService = mailService;
     }
 
     @Override
@@ -104,9 +109,12 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
     @Override
     public String resetPasswordByLogin(String login) {
         User user = userInfoService.getUserByLogin(login);
-        user.setPassword(passwordGenerator.generatePassword(12));
+        String password = passwordGenerator.generatePassword(12);
 
-        userManageService.saveUserInDataBase(user); // TODO прикрутить отправку пароля по почте
+        user.setPassword(passwordEncoder.encode(password));
+
+        userManageService.saveUserInDataBase(user);
+        mailService.sendMailNotification(user.getEmail(), "Ваш новый пароль для входа в систему: " + password, "Восстановление пароя");
         return "Поздравляю! Пароль успешно изменен и отправлен Вам на почту.";
     }
 
