@@ -3,6 +3,7 @@ package com.wayz.CFMS.services.user.impl;
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
 import com.wayz.CFMS.models.subModels.UserActivityStatus;
+import com.wayz.CFMS.repositories.UserRepository;
 import com.wayz.CFMS.services.user.UserInfoService;
 import com.wayz.CFMS.services.user.UserManageService;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,11 @@ import java.util.Optional;
 @Service
 public class UserManageServiceImpl implements UserManageService {
 
+    private final UserRepository userRepository;
     private final UserInfoService userInfoService;
 
-    public UserManageServiceImpl(UserInfoService userInfoService) {
+    public UserManageServiceImpl(UserRepository userRepository, UserInfoService userInfoService) {
+        this.userRepository = userRepository;
         this.userInfoService = userInfoService;
     }
 
@@ -43,8 +46,7 @@ public class UserManageServiceImpl implements UserManageService {
 
         userForUpdate.setUpdatedDate(LocalDateTime.now());
 
-        userInfoService.saveUserInDataBase(userForUpdate);
-
+        saveUserInDataBase(userForUpdate);
         return userForUpdate;
     }
 
@@ -53,7 +55,17 @@ public class UserManageServiceImpl implements UserManageService {
         User userForUpdate = userInfoService.getUserByLogin(login);
         Optional.ofNullable(userStatus).ifPresent(userForUpdate::setStatus);
 
-        userInfoService.saveUserInDataBase(userForUpdate);
+        saveUserInDataBase(userForUpdate);
         return userForUpdate;
+    }
+
+    @Override
+    public void saveUserInDataBase(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUserFromDataBase(User user) {
+        userRepository.delete(user);
     }
 }
