@@ -2,6 +2,8 @@ package com.wayz.CFMS.services.user.auth;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -29,12 +31,30 @@ public interface UserAuthService {
     /**
      * Выход пользователя из системы
      */
-    void logoutUserFromSystem();
+    void logoutUserFromSystem(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * Сбросить пароль у текущего авторизованного пользователя
+     * Изменить пароль у авторизованного пользователя
      *
-     * @return новый пароль
+     * @param password новый пароль
+     * @return сообщение о статусе изменения пароля
      */
-    String resetPassword();
+    String resetPassword(String password);
+
+
+    /**
+     * Восстановление пароля по логину. Новый пароль придет на почту.
+     * В аргументах пароль НЕ передается.
+     *
+     * @param login логин пользователя для восстановления пароля
+     * @return сообщение о статусе изменения пароля
+     */
+    String resetPasswordByLogin(String login);
+
+    /**
+     * Получить текущего авторизованного пользователя
+     *
+     * @return объект пользователя
+     */
+    User getCurrentAuthUser();
 }
