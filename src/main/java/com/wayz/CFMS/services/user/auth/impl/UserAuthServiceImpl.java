@@ -43,10 +43,19 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
      */
     private final LoginUserService loginUserService;
 
+    /**
+     * Объект интерфейса кодирования пароля через Bcrypt
+     */
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Объект интерфейса управления пользователями
+     */
     private final UserManageService userManageService;
 
+    /**
+     * Объект интерфейса генерации паролей
+     */
     private final PasswordGenerator passwordGenerator;
 
 
