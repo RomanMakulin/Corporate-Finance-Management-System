@@ -77,13 +77,4 @@ public class UserInfoServiceImpl implements UserInfoService {
         return user.getFirstName() + " " + user.getLastName() + " был зарегистрирован в системе: " + user.getRegistrationDate();
     }
 
-    @Override
-    public void saveUserInDataBase(User user) {
-        userRepository.save(user);
-    }
-
-    @Override
-    public void deleteUserFromDataBase(User user) {
-        userRepository.delete(user);
-    }
 }

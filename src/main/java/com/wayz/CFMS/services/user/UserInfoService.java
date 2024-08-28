@@ -90,17 +90,4 @@ public interface UserInfoService {
      */
     String getUserRegistrationDate(String login);
 
-    /**
-     * Сохранить пользователя через JPA Repository в БД
-     *
-     * @param user объект пользователя для сохранения
-     */
-    void saveUserInDataBase(User user);
-
-    /**
-     * Удалить пользователя из базы данных
-     *
-     * @param user объект пользователя
-     */
-    void deleteUserFromDataBase(User user);
 }
