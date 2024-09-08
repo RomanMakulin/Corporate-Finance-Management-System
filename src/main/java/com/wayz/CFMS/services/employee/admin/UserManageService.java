@@ -21,4 +21,11 @@ public interface UserManageService {
      * @return обновленный объект пользователя
      */
     User updateUserStatus(String login, UserActivityStatus userStatus);
+
+    /**
+     * Удаление пользователя администратором
+     *
+     * @param login логин пользователя для удаления
+     */
+    void deleteUser(String login);
 }

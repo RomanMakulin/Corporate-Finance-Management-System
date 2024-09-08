@@ -49,4 +49,13 @@ public class UserManageServiceImpl implements UserManageService {
         return userForUpdate;
     }
 
+    @Override
+    public void deleteUser(String login) {
+        if (userInfoService.existsUserByLogin(login)) {
+            userRepository.delete(userInfoService.getUserByLogin(login));
+        } else {
+            throw new IllegalArgumentException("Ошибка удаления пользователя. Пользователь с таким login не найден: " + login);
+        }
+    }
+
 }
