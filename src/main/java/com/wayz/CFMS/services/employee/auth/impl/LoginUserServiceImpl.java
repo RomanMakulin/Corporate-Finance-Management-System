@@ -1,6 +1,6 @@
-package com.wayz.CFMS.services.user.auth.impl;
+package com.wayz.CFMS.services.employee.auth.impl;
 
-import com.wayz.CFMS.services.user.auth.LoginUserService;
+import com.wayz.CFMS.services.employee.auth.LoginUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

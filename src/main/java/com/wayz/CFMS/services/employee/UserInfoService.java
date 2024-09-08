@@ -1,4 +1,4 @@
-package com.wayz.CFMS.services.user;
+package com.wayz.CFMS.services.employee;
 
 import com.wayz.CFMS.models.User;
 

@@ -1,6 +1,6 @@
-package com.wayz.CFMS.services.user.auth.impl;
+package com.wayz.CFMS.services.employee.auth.impl;
 
-import com.wayz.CFMS.services.user.auth.PasswordGenerator;
+import com.wayz.CFMS.services.employee.auth.PasswordGenerator;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;

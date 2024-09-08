@@ -1,7 +1,7 @@
 package com.wayz.CFMS.configuration;
 
 import com.wayz.CFMS.models.subModels.UserRole;
-import com.wayz.CFMS.services.user.auth.impl.UserAuthServiceImpl;
+import com.wayz.CFMS.services.employee.auth.impl.UserAuthServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

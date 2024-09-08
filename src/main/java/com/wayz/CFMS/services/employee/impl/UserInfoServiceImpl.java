@@ -1,10 +1,8 @@
-package com.wayz.CFMS.services.user.impl;
+package com.wayz.CFMS.services.employee.impl;
 
 import com.wayz.CFMS.models.User;
 import com.wayz.CFMS.repositories.UserRepository;
-import com.wayz.CFMS.services.user.UserInfoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wayz.CFMS.services.employee.UserInfoService;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

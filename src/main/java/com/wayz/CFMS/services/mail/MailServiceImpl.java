@@ -1,4 +1,4 @@
-package com.wayz.CFMS.services.user.mail;
+package com.wayz.CFMS.services.mail;
 
 import com.wayz.CFMS.configuration.MailConfig;
 import org.springframework.stereotype.Service;

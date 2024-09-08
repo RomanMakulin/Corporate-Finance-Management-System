@@ -1,4 +1,4 @@
-package com.wayz.CFMS.services.user.mail;
+package com.wayz.CFMS.services.mail;
 
 /**
  * Интерфейс сервиса почтовых рассылок

@@ -1,10 +1,10 @@
-package com.wayz.CFMS.services.user.auth.impl;
+package com.wayz.CFMS.services.employee.auth.impl;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
-import com.wayz.CFMS.services.user.UserInfoService;
-import com.wayz.CFMS.services.user.UserManageService;
-import com.wayz.CFMS.services.user.auth.RegistrationService;
+import com.wayz.CFMS.services.employee.UserInfoService;
+import com.wayz.CFMS.services.employee.user.UserService;
+import com.wayz.CFMS.services.employee.auth.RegistrationService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +16,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private final UserInfoService userInfoService;
     private final PasswordEncoder passwordEncoder;
-    private final UserManageService userManageService;
+    private final UserService userService;
 
     public RegistrationServiceImpl(UserInfoService userInfoService,
-                                   PasswordEncoder passwordEncoder, UserManageService userManageService) {
+                                   PasswordEncoder passwordEncoder, UserService userService) {
         this.userInfoService = userInfoService;
         this.passwordEncoder = passwordEncoder;
-        this.userManageService = userManageService;
+        this.userService = userService;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                     regData.getEmail(),
                     regData.getDateBirth());
 
-            userManageService.saveUserInDataBase(newUser);
+            userService.saveUserInDataBase(newUser);
             return newUser;
         } catch (NullPointerException e) {
             throw new NullPointerException("Ошибка при создании пользователя: " + e);

@@ -1,15 +1,15 @@
-package com.wayz.CFMS.services.user.auth.impl;
+package com.wayz.CFMS.services.employee.auth.impl;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
-import com.wayz.CFMS.services.user.UserInfoService;
-import com.wayz.CFMS.services.user.UserManageService;
-import com.wayz.CFMS.services.user.auth.LoginUserService;
-import com.wayz.CFMS.services.user.auth.PasswordGenerator;
-import com.wayz.CFMS.services.user.auth.RegistrationService;
-import com.wayz.CFMS.services.user.auth.UserAuthService;
-import com.wayz.CFMS.services.user.mail.MailService;
-import com.wayz.CFMS.services.user.security.CustomUserDetails;
+import com.wayz.CFMS.repositories.UserRepository;
+import com.wayz.CFMS.services.employee.UserInfoService;
+import com.wayz.CFMS.services.employee.auth.LoginUserService;
+import com.wayz.CFMS.services.employee.auth.PasswordGenerator;
+import com.wayz.CFMS.services.employee.auth.RegistrationService;
+import com.wayz.CFMS.services.employee.auth.UserAuthService;
+import com.wayz.CFMS.services.mail.MailService;
+import com.wayz.CFMS.services.employee.security.CustomUserDetails;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Lazy;
@@ -29,54 +29,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAuthServiceImpl implements UserDetailsService, UserAuthService {
 
-    /**
-     * Объект интерфейса получения информации о пользователях
-     */
     private final UserInfoService userInfoService;
-
-    /**
-     * Объект интерфейса регистрации пользователей в системе
-     */
     private final RegistrationService registrationService;
-
-    /**
-     * Объект интерфейса входа пользователя в систему
-     */
     private final LoginUserService loginUserService;
-
-    /**
-     * Объект интерфейса кодирования пароля через Bcrypt
-     */
     private final PasswordEncoder passwordEncoder;
-
-    /**
-     * Объект интерфейса управления пользователями
-     */
-    private final UserManageService userManageService;
-
-    /**
-     * Объект интерфейса генерации паролей
-     */
     private final PasswordGenerator passwordGenerator;
-
     private final MailService mailService;
+    private final UserRepository userRepository;
 
 
     public UserAuthServiceImpl(@Lazy UserInfoService userInfoService,
-                               @Lazy UserManageService userManageService,
                                RegistrationService registrationService,
                                LoginUserService loginUserService,
                                PasswordEncoder passwordEncoder,
                                PasswordGenerator passwordGenerator,
-                               MailService mailService) {
+                               MailService mailService,
+                               UserRepository userRepository) {
 
         this.userInfoService = userInfoService;
         this.registrationService = registrationService;
         this.loginUserService = loginUserService;
         this.passwordEncoder = passwordEncoder;
-        this.userManageService = userManageService;
         this.passwordGenerator = passwordGenerator;
         this.mailService = mailService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -102,7 +78,7 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
         User user = getCurrentAuthUser();
         user.setPassword(passwordEncoder.encode(password));
 
-        userManageService.saveUserInDataBase(user);
+        userRepository.save(user);
         return "Поздравляю! Пароль успешно изменен. Login: " + user.getLogin() + ", password: " + password;
     }
 
@@ -113,7 +89,7 @@ public class UserAuthServiceImpl implements UserDetailsService, UserAuthService 
 
         user.setPassword(passwordEncoder.encode(password));
 
-        userManageService.saveUserInDataBase(user);
+        userRepository.save(user);
         mailService.sendMailNotification(user.getEmail(), "Ваш новый пароль для входа в систему: " + password, "Восстановление пароя");
         return "Поздравляю! Пароль успешно изменен и отправлен Вам на почту.";
     }

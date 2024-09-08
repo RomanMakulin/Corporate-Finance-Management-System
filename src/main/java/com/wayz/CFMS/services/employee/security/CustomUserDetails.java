@@ -1,4 +1,4 @@
-package com.wayz.CFMS.services.user.security;
+package com.wayz.CFMS.services.employee.security;
 
 import com.wayz.CFMS.models.User;
 import org.springframework.security.core.GrantedAuthority;

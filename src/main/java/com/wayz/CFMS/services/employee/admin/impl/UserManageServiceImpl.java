@@ -1,34 +1,24 @@
-package com.wayz.CFMS.services.user.impl;
+package com.wayz.CFMS.services.employee.admin.impl;
 
-import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
 import com.wayz.CFMS.models.subModels.UserActivityStatus;
 import com.wayz.CFMS.repositories.UserRepository;
-import com.wayz.CFMS.services.user.UserInfoService;
-import com.wayz.CFMS.services.user.UserManageService;
+import com.wayz.CFMS.services.employee.admin.UserManageService;
+import com.wayz.CFMS.services.employee.UserInfoService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-/**
- * Реализация интерфейса UserManageService для управления пользователями и их данными
- */
 @Service
 public class UserManageServiceImpl implements UserManageService {
 
-    private final UserRepository userRepository;
     private final UserInfoService userInfoService;
+    private final UserRepository userRepository;
 
-    public UserManageServiceImpl(UserRepository userRepository, UserInfoService userInfoService) {
-        this.userRepository = userRepository;
+    public UserManageServiceImpl(UserInfoService userInfoService, UserRepository userRepository) {
         this.userInfoService = userInfoService;
-    }
-
-    @Override
-    public User updateCurrentUser(UserRegistrationData updateData) {
-        // TODO Доделать когда реализую Security
-        return null;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -46,26 +36,17 @@ public class UserManageServiceImpl implements UserManageService {
 
         userForUpdate.setUpdatedDate(LocalDateTime.now());
 
-        saveUserInDataBase(userForUpdate);
+        userRepository.save(userForUpdate);
         return userForUpdate;
     }
 
     @Override
-    public User updateUserStatus(String login, UserActivityStatus userStatus) {
+    public User updateUserStatus(String login, UserActivityStatus userStatus) { // TODO перенести в раздел админа
         User userForUpdate = userInfoService.getUserByLogin(login);
         Optional.ofNullable(userStatus).ifPresent(userForUpdate::setStatus);
 
-        saveUserInDataBase(userForUpdate);
+        userRepository.save(userForUpdate);
         return userForUpdate;
     }
 
-    @Override
-    public void saveUserInDataBase(User user) {
-        userRepository.save(user);
-    }
-
-    @Override
-    public void deleteUserFromDataBase(User user) {
-        userRepository.delete(user);
-    }
 }

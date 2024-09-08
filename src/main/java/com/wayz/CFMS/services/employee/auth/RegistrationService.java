@@ -1,4 +1,4 @@
-package com.wayz.CFMS.services.user.auth;
+package com.wayz.CFMS.services.employee.auth;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
