@@ -3,6 +3,7 @@ package com.wayz.CFMS.models;
 import com.wayz.CFMS.models.subModels.UserActivityStatus;
 import com.wayz.CFMS.models.subModels.UserRole;
 import jakarta.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -25,28 +26,33 @@ public class User {
     /**
      * Логин для аутентификации
      */
+    @NotNull(message = "Логин не может быть пустым")
     private String login;
 
     /**
      * Пароль для аутентификации
      */
+    @NotNull(message = "Пароль не может быть пустым")
     private String password;
 
     /**
      * Имя пользователя
      */
+    @NotNull(message = "Имя не может быть пустым")
     @Column(name = "first_name")
     private String firstName;
 
     /**
      * Фамилия пользователя
      */
+    @NotNull(message = "Фамилия не может быть пустой")
     @Column(name = "last_name")
     private String lastName;
 
     /**
      * EMAIL пользователя
      */
+    @NotNull(message = "Email не может быть пустым")
     private String email;
 
     /**
@@ -58,6 +64,7 @@ public class User {
     /**
      * День рождения пользователя
      */
+    @NotNull(message = "Дата рождения не может быть пустой")
     @Column(name = "birthday_date")
     private LocalDateTime birthdayDate;
 

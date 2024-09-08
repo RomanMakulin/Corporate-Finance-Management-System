@@ -2,8 +2,8 @@ package com.wayz.CFMS.services.employee.auth.impl;
 
 import com.wayz.CFMS.dto.UserRegistrationData;
 import com.wayz.CFMS.models.User;
+import com.wayz.CFMS.repositories.UserRepository;
 import com.wayz.CFMS.services.employee.UserInfoService;
-import com.wayz.CFMS.services.employee.user.UserService;
 import com.wayz.CFMS.services.employee.auth.RegistrationService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,13 +16,14 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private final UserInfoService userInfoService;
     private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     public RegistrationServiceImpl(UserInfoService userInfoService,
-                                   PasswordEncoder passwordEncoder, UserService userService) {
+                                   PasswordEncoder passwordEncoder,
+                                   UserRepository userRepository) {
         this.userInfoService = userInfoService;
         this.passwordEncoder = passwordEncoder;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class RegistrationServiceImpl implements RegistrationService {
                     regData.getEmail(),
                     regData.getDateBirth());
 
-            userService.saveUserInDataBase(newUser);
+            userRepository.save(newUser);
             return newUser;
         } catch (NullPointerException e) {
             throw new NullPointerException("Ошибка при создании пользователя: " + e);
